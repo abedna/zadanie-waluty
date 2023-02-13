@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Interfaces\CurrencyRateServiceInterface;
+use App\Services\NbpCurrencyRateService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CurrencyRateServiceInterface::class, function () {
+            return new NbpCurrencyRateService();
+        });
     }
 
     /**
